@@ -53,10 +53,15 @@ def preprocess_data(data, target_threshold=0.005):
     # --- 4. PENYIMPANAN DATA UTUH KE CSV ---
     df_final = X.copy()
     df_final['Target'] = y.values
-    df_final.to_csv("btc_preprocessing.csv", index=True)
+    df_final.to_csv("preprocessing/btc_preprocessing.csv", index=True)
     print("  [INFO] File 'btc_preprocessing.csv' berhasil diperbarui dan disimpan.")
 
     # --- 5. TRAIN-TEST SPLIT ---
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=False)
 
     return X_train, X_test, y_train, y_test
+
+if __name__ == "__main__":
+    df_raw = pd.read_csv("../btc_raw.csv")
+    
+    preprocess_data(df_raw)
